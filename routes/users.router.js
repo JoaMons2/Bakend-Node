@@ -1,10 +1,17 @@
-const productsRouter = require('./products.router');
-// const usersRouter = require('./users.router');
+const express = require('express');
 
-function routerApi(app) {
-  app.use('/products', productsRouter);
-  // app.use('/users', productsRouter);
-  // app.use('/categories', productsRouter);
-}
+const router = express.Router();
 
-module.exports = routerApi;
+router.get('/', (req, res) => {
+  const { limit, offset } = req.query;
+  if (limit && offset) {
+    res.json({
+      limit,
+      offset
+    });
+  } else {
+    res.send('No hay párametros');
+  }
+});
+
+module.exports = router;
